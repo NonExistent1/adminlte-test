@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'tickets.apps.TicketsConfig',
+    'adminlte2_pdq',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'adminlte2_pdq.middleware.AuthMiddleware',
 ]
 
 ROOT_URLCONF = 'django_project.urls'
@@ -54,7 +57,7 @@ ROOT_URLCONF = 'django_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,3 +124,43 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Set the redirect after login
+LOGIN_REDIRECT_URL = 'project_list'
+
+# Ensure that all users must be logged in to be able to use the site
+ADMINLTE2_USE_LOGIN_REQUIRED = True
+ADMINLTE2_HOME_ROUTE = "project_list"
+
+ADMINLTE2_LOGO_TEXT = "Ticket Tracking"
+ADMINLTE2_LOGO_TEXT_SMALL = "TT"
+
+ADMINLTE2_INCLUDE_ADMIN_HOME_LINK = True
+ADMINLTE2_INCLUDE_MAIN_NAV_ON_ADMIN_PAGES = True
+ADMINLTE2_INCLUDE_ADMIN_NAV_ON_MAIN_PAGES = True
+
+# AdminLTE2 Menu
+
+ADMINLTE2_MENU = [
+    {
+        "text": "Home",
+        "nodes": [
+            {
+                "route": "project_list",
+                "text": "Projects",
+                "icon": "fa fa-archive",
+            },
+        ],
+    },
+    {
+        "text": "Profile",
+        "nodes": [
+            {
+                "route": "password_change",
+                "text": "Change Password",
+                "icon": "fa fa-lock",
+            },
+        ],
+    },
+]

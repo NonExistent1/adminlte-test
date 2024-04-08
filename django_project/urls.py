@@ -14,8 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
+    # Ticket URLS will be at /projects since that is the outer model
+    path("projects/", include("tickets.urls")),
+    # Adminlte2 Default Routes for demo purpose
+    path('', include('adminlte2_pdq.urls')),
+    # Django Account Routes
+    path('accounts/', include('django.contrib.auth.urls')),
+    # Admin - Styled in Django but hosted in Adminlte2 layout
     path('admin/', admin.site.urls),
 ]
