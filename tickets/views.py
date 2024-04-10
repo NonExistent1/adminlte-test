@@ -65,7 +65,7 @@ class TicketCreateView(CreateView):
         "description",
         "priority",
         "assigned_to",
-        "complete_by",
+        "completed_by",
         "completed",
     ]
 
@@ -81,7 +81,7 @@ class TicketCreateView(CreateView):
     
     def get_context_data(self):
         """Add variables to the template context"""
-        context = super.get_context_data()
+        context = super().get_context_data()
         context["project"] = Project.objects.get(pk=self.project_pk)
         return context
     
@@ -93,7 +93,7 @@ class TicketCreateView(CreateView):
     def get_success_url(self):
         """Return the location to redirect to on success"""
         messages.success(self.request, "Ticket Created Successfully")
-        return reverse("project_detail", kwards={"pk": self.project_pk})
+        return reverse("project_detail", kwargs={"pk": self.project_pk})
 
 class TicketEditView(UpdateView):
     """Update a Ticket"""
@@ -105,7 +105,7 @@ class TicketEditView(UpdateView):
         "description",
         "priority",
         "assigned_to",
-        "complete_by",
+        "completed_by",
         "completed",
     ]
 
@@ -121,13 +121,13 @@ class TicketEditView(UpdateView):
     
     def get_context_data(self):
         """Add variables to the template context"""
-        context = super.get_context_data()
+        context = super().get_context_data()
         context["project"] = Project.objects.get(pk=self.project_pk)
         return context
     
     def get_success_url(self):
         """Return the location to redirect to on success"""
         messages.success(self.request, "Ticket Updated Successfully")
-        return reverse("project_detail", kwards={"pk": self.project_pk})
+        return reverse("project_detail", kwargs={"pk": self.project_pk})
     
 
